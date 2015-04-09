@@ -11,5 +11,15 @@ namespace GridBank
         {
             InitializeComponent();
         }
+
+        private void Charge_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void Discharge_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

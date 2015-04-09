@@ -2,12 +2,67 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Title="GridBank" 
-                      Height="350" 
+                      xmlns:local="clr-namespace:GridBank"
+                      xmlns:gauge="clr-namespace:CircularGauge;assembly=CircularGauge"
+                      Title="GridBank"
+                      Height="350"
                       Width="525"
                       BorderThickness="0"
                       GlowBrush="Black">
+    <Controls:MetroWindow.Background>
+        <ImageBrush ImageSource="Assets/alevo.jpg"
+                    Stretch="UniformToFill"/>
+    </Controls:MetroWindow.Background>
     <Grid>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,10">
+            <Button Content="Discharge"
+                    Background="Red"
+                    Margin="0,0,0,10"
+                    Click="Discharge_Click"></Button>
+            <Button Content="Charge"
+                    Background="Lime"
+                    Click="Charge_Click"></Button>
+        </StackPanel>
+        
+        <!--Blue Gauge -->
+        <gauge:CircularGaugeControl x:Name="myGauge2"
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    Radius="150"
+                                    ScaleRadius="100"
+                                    ScaleStartAngle="140"
+                                    ScaleSweepAngle="270"
+                                    PointerLength="90"
+                                    PointerCapRadius="35"
+                                    MinValue="0"
+                                    MaxValue="1"
+                                    MajorDivisionsCount="10"
+                                    MinorDivisionsCount="5"
+                                    OptimalRangeEndValue="0.8"
+                                    OptimalRangeStartValue="0.5"
+                                    CurrentValue="{Binding Score}"
+                                    ImageSize="40,50"
+                                    RangeIndicatorThickness="9"
+                                    RangeIndicatorRadius="80"
+                                    RangeIndicatorLightRadius="10"
+                                    RangeIndicatorLightOffset="80"
+                                    ScaleLabelRadius="115"
+                                    ScaleLabelSize="40,20"
+                                    ScaleLabelFontSize="10"
+                                    ScaleLabelForeground="White"
+                                    MajorTickSize="10,3"
+                                    MinorTickSize="3,1"
+                                    MajorTickColor="White"
+                                    MinorTickColor="LightGray"
+                                    ImageOffset="-50"
+                                    GaugeBackgroundColor="#FF202123"
+                                    PointerThickness="5"
+                                    DialTextOffset="40"
+                                    DialText="Power Level"
+                                    DialTextColor="White" />
 
     </Grid>
 </Controls:MetroWindow>
