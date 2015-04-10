@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using GridBankApi;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(GridBankApi.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace GridBankApi
 {

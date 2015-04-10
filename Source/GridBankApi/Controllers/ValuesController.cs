@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace GridBankApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values
