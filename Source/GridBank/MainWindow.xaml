@@ -43,7 +43,7 @@
                                     MinorDivisionsCount="5"
                                     OptimalRangeEndValue="0.8"
                                     OptimalRangeStartValue="0.5"
-                                    CurrentValue="{Binding Score}"
+                                    CurrentValue="{Binding CurrentValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     ImageSize="40,50"
                                     RangeIndicatorThickness="9"
                                     RangeIndicatorRadius="80"
