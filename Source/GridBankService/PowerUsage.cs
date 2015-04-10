@@ -13,9 +13,6 @@ namespace GridBankService
         {
             using (var context = new GridBankDb())
             {
-                var allSites = context.GridBankSites;
-
-
                 var site = context.GridBankSites.Find(SiteId);
                 if (site == null) throw new Exception("Site not found!");
 
@@ -46,8 +43,11 @@ namespace GridBankService
         {
             using (var context = new GridBankDb())
             {
+                var site = context.GridBankSites.Find(SiteId);
+                if (site == null) throw new Exception("Site not found!");
+
                 var lastReading =
-                    context.Usages.Where(x => x.GridBankSiteId == SiteId)
+                    site.Usages
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
@@ -62,7 +62,7 @@ namespace GridBankService
                     IsNew = true
                 };
 
-                context.Usages.Add(usage);
+                site.Usages.Add(usage);
                 context.SaveChanges();
 
                 return usage.CurrentPower;

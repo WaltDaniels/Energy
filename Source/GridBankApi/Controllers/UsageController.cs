@@ -23,10 +23,10 @@ namespace GridBankApi.Controllers
             var currentPower = service.Drain(body.SiteId, body.Amount);
         }
 
-        [Route("usage/charge")]
+        [Route("api/usage/charge")]
         [AcceptVerbs("POST")]
         [HttpPost]
-        public void Charge([FromBody]ChargeModel body)
+        public void Charge(ChargeModel body)
         {
             var service = new PowerUsage();
             var currentPoser = service.Charge(body.SiteId, body.Amount);
