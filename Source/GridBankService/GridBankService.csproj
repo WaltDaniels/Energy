@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GridBankCommon\GridBankCommon.csproj">
+      <Project>{1D92472E-05F5-4CFF-8B50-58D8548B9C4E}</Project>
+      <Name>GridBankCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GridBankData\GridBankData.csproj">
       <Project>{ec41c974-4752-4893-96c5-9c49813e24fd}</Project>
       <Name>GridBankData</Name>

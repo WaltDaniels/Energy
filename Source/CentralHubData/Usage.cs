@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GridBankData
+namespace CentralHubData
 {
     [Table("Usage")]
     public partial class Usage

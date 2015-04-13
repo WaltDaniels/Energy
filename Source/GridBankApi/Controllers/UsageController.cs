@@ -1,8 +1,7 @@
-﻿using System.Dynamic;
+﻿using System;
 using System.Web.Http;
-using GridBankApi.Models;
+using GridBankCommon.Models;
 using GridBankService;
-using Newtonsoft.Json.Linq;
 
 namespace GridBankApi.Controllers
 {
@@ -32,5 +31,19 @@ namespace GridBankApi.Controllers
             var currentPoser = service.Charge(body.SiteId, body.Amount);
         }
 
+        [Route("api/usage/getupates")]
+        [AcceptVerbs("GET")]
+        [HttpGet]
+        public Details GetUpdates(int siteId, DateTime detailsStartingDateTime)
+        {
+            var service = new PowerUsage();
+            var details = new Details()
+            {
+                SiteId = siteId,
+                UsageEntries = service.GetEntries(siteId, detailsStartingDateTime)
+            };
+
+            return details;
+        }
     }
 }

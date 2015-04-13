@@ -1,9 +1,8 @@
-﻿using GridBankData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GridBankCommon.Models;
+using GridBankData;
 
 namespace GridBankService
 {
@@ -66,6 +65,26 @@ namespace GridBankService
                 context.SaveChanges();
 
                 return usage.CurrentPower;
+            }
+        }
+
+        public List<UsageEntry> GetEntries(int SiteId, DateTime detailsStartingDateTime)
+        {
+            using (var context = new GridBankDb())
+            {
+                var usageEntries =
+                    context.Usages
+                           .Where(x => x.TimeStamp >= detailsStartingDateTime)
+                           .OrderBy(x => x.TimeStamp)
+                           .Select(x => new UsageEntry
+                           {
+                               IdGuid = x.IdGuid,
+                               TimeStamp = x.TimeStamp,
+                               CurrentPower = x.CurrentPower
+                           })
+                           .ToList();
+
+                return usageEntries;
             }
         }
 
