@@ -17,6 +17,9 @@ namespace GridBank
             InitializeComponent();
             viewModel = new MainWindowViewModel();
             DataContext = viewModel;
+
+            //TODO: Read current Power Level from GridBankApi
+
         }
 
         private void Charge_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -29,6 +32,8 @@ namespace GridBank
             {
                 viewModel.CurrentValue = 1;
             }
+
+            //TODO: Send the event to GridBankApi
         }
 
         private void Discharge_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -41,6 +46,8 @@ namespace GridBank
             {
                 viewModel.CurrentValue = 0;
             }
+
+            //TODO: Send the event to GridBankApi
         }
     }
 

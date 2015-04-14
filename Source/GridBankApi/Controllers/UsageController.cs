@@ -28,7 +28,18 @@ namespace GridBankApi.Controllers
         public void Charge(ChargeModel body)
         {
             var service = new PowerUsage();
-            var currentPoser = service.Charge(body.SiteId, body.Amount);
+            var currentPower = service.Charge(body.SiteId, body.Amount);
+        }
+
+        [Route("api/usage/getcurrentpower")]
+        [AcceptVerbs("GET")]
+        [HttpGet]
+        public decimal GetCurrentPower(int siteId)
+        {
+            var service = new PowerUsage();
+            var currentPower = service.GetCurrentPower(siteId);
+
+            return currentPower;
         }
 
         [Route("api/usage/getupates")]

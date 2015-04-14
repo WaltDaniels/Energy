@@ -74,7 +74,7 @@ namespace GridBankService
             {
                 var usageEntries =
                     context.Usages
-                           .Where(x => x.TimeStamp >= detailsStartingDateTime)
+                           .Where(x => x.GridBankSiteId == SiteId && x.TimeStamp >= detailsStartingDateTime)
                            .OrderBy(x => x.TimeStamp)
                            .Select(x => new UsageEntry
                            {
@@ -88,5 +88,18 @@ namespace GridBankService
             }
         }
 
+        public decimal GetCurrentPower(int siteId)
+        {
+            using (var context = new GridBankDb())
+            {
+                var site = context.GridBankSites.Find(siteId);
+                if (site == null) throw new Exception("Site not found!");
+
+                var lastUsage = site.Usages.OrderByDescending(x => x.TimeStamp).FirstOrDefault();
+                decimal lastPower = lastUsage != null ? lastUsage.CurrentPower : 0;
+
+                return lastPower;
+            }
+        }
     }
 }
