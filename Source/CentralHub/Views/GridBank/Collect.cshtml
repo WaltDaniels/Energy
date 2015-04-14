@@ -1,0 +1,35 @@
+﻿@model CentralHubService.Models.Details
+@{
+    ViewBag.Title = "Collect";
+}
+
+<h2>Collect</h2>
+
+@if (@Model != null)
+{
+    <h3>SiteId: @Model.SiteId</h3>
+
+    if (Model.UsageEntries.Count > 0)
+    {
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <td>Uniquie ID</td>
+                <td>Entry Date / Time</td>
+                <td>Current Power Level</td>
+            </tr>
+            @foreach (var item in Model.UsageEntries)
+            {
+                <tr>
+                    <td>@item.IdGuid</td>
+                    <td>@item.TimeStamp</td>
+                    <td>@item.CurrentPower</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <b>No new data found.</b>
+    }
+}
+
