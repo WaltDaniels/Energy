@@ -76,7 +76,7 @@ namespace GridBankService
             {
                 var usageEntries =
                     context.Usages
-                           .Where(x => x.GridBankSiteId == SiteId && x.TimeStamp >= detailsStartingDateTime)
+                           .Where(x => x.GridBankSiteId == SiteId && x.TimeStamp > detailsStartingDateTime)
                            .OrderBy(x => x.TimeStamp)
                            .Select(x => new UsageEntry
                            {

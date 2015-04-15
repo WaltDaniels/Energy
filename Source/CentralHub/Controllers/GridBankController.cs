@@ -10,12 +10,19 @@ namespace CentralHub.Controllers
 
         public async Task<ActionResult> Collect()
         {
-            var service = new CollectUsage();
+            try
+            {
+                var service = new CollectUsage();
 
-            var usageDetails = await service.GetRemoteData(_siteId);
-            service.SaveData(usageDetails);
+                var usageDetails = await service.GetRemoteData(_siteId);
+                service.SaveData(usageDetails);
 
-            return View(usageDetails);
+                return View(usageDetails);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult Display()
