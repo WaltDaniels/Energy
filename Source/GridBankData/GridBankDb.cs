@@ -1,10 +1,7 @@
+using System.Data.Entity;
+
 namespace GridBankData
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class GridBankDb : DbContext
     {
         public GridBankDb()
@@ -21,6 +18,10 @@ namespace GridBankData
                 .HasMany(e => e.Usages)
                 .WithRequired(e => e.GridBankSite)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Usage>()
+                .Property(x => x.CurrentPower)
+                .HasPrecision(18, 3);
         }
     }
 }

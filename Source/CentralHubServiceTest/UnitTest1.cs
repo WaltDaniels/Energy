@@ -11,7 +11,7 @@ namespace CentralHubServiceTest
         public void TestMethod1()
         {
             //var service = new CollectUsage();
-            //var response = service.GetData(1);
+            //var response = service.GetRemoteData(1);
             ServiceGetdata(1);
         }
 
@@ -19,7 +19,7 @@ namespace CentralHubServiceTest
         {
             var service = new CollectUsage();
             //var response = await 
-            service.GetData(1);
+            service.GetRemoteData(1);
         }
     }
 }

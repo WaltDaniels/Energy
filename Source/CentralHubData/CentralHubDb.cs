@@ -18,6 +18,10 @@ namespace CentralHubData
                 .HasMany(e => e.Usages)
                 .WithRequired(e => e.GridBankSite)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Usage>()
+                .Property(x => x.CurrentPower)
+                .HasPrecision(18, 3);
         }
     }
 }

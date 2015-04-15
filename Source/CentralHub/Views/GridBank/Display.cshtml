@@ -1,7 +1,34 @@
-﻿
+﻿@model List<CentralHubService.Models.UsageEntry>
 @{
     ViewBag.Title = "Display";
 }
 
 <h2>Display</h2>
 
+@if (@Model != null)
+{
+    <h3>SiteId: @ViewBag.SiteId</h3>
+
+    if (Model.Count > 0)
+    {
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <td>Uniquie ID</td>
+                <td>Entry Date / Time</td>
+                <td>Current Power Level</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdGuid</td>
+                    <td>@item.TimeStamp</td>
+                    <td>@item.CurrentPower</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <b>No new data found.</b>
+    }
+}

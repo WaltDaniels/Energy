@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +12,7 @@ namespace CentralHubService
 {
     public class CollectUsage
     {
-        public async Task<Details> GetData(int SiteId)
+        public async Task<Details> GetRemoteData(int SiteId)
         {
             Details retDetails = null;
 
@@ -82,6 +83,25 @@ namespace CentralHubService
 
                 //Save everything
                 context.SaveChanges();
+            }
+        }
+
+        public List<UsageEntry> GetData(int siteId)
+        {
+            using (var context = new CentralHubDb())
+            {
+                var site = context.GridBankSites.Find(siteId);
+                if (site == null) throw new Exception("Site not found!");
+
+                return site.Usages
+                    .OrderByDescending(x => x.TimeStamp)
+                    .Select(x => new UsageEntry
+                    {
+                        IdGuid = x.IdGuid,
+                        TimeStamp = x.TimeStamp,
+                        CurrentPower = x.CurrentPower
+                    })
+                    .ToList();
             }
         }
     }
