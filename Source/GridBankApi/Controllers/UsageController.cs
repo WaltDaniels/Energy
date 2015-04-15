@@ -15,20 +15,23 @@ namespace GridBankApi.Controllers
         [Route("api/usage/drain")]
         [AcceptVerbs("POST")]
         [HttpPost]
-        public void Drain(DrainModel body)
+        public decimal Drain(DrainModel body)
         {
-
             var service = new PowerUsage();
             var currentPower = service.Drain(body.SiteId, body.Amount);
+
+            return currentPower;
         }
 
         [Route("api/usage/charge")]
         [AcceptVerbs("POST")]
         [HttpPost]
-        public void Charge(ChargeModel body)
+        public decimal Charge(ChargeModel body)
         {
             var service = new PowerUsage();
             var currentPower = service.Charge(body.SiteId, body.Amount);
+
+            return currentPower;
         }
 
         [Route("api/usage/getcurrentpower")]

@@ -25,6 +25,7 @@ namespace GridBankService
 
                 var usage = new Usage()
                 {
+                    IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
                     TimeStamp = DateTime.Now,
                     CurrentPower = lastPower - Amount,
@@ -55,6 +56,7 @@ namespace GridBankService
 
                 var usage = new Usage()
                 {
+                    IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
                     TimeStamp = DateTime.Now,
                     CurrentPower = lastPower + Amount,

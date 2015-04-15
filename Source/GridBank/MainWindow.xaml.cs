@@ -9,8 +9,8 @@ namespace GridBank
     public partial class MainWindow : MetroWindow
     {
         private MainWindowViewModel viewModel;
-
         private double _clickIncrement = .025;
+        private int _siteId = 1;
 
         public MainWindow()
         {
@@ -18,70 +18,30 @@ namespace GridBank
             viewModel = new MainWindowViewModel();
             DataContext = viewModel;
 
-            //TODO: Read current Power Level from GridBankApi
-
+            //Read current Power Level from GridBankApi
+            var apiAdapter = new GridBankApiAdapter();
+            viewModel.CurrentValue = apiAdapter.GetCurrentPower(_siteId);
         }
 
         private void Charge_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (viewModel.CurrentValue <= (1 - _clickIncrement))
-            {
-                viewModel.CurrentValue = viewModel.CurrentValue + .025;
-            }
-            else
-            {
-                viewModel.CurrentValue = 1;
-            }
+            //Send the event to GridBankApi
+            var apiAdapter = new GridBankApiAdapter();
+            viewModel.CurrentValue = apiAdapter.Charge(_siteId, (decimal)_clickIncrement);
 
-            //TODO: Send the event to GridBankApi
+            if (viewModel.CurrentValue > 1) viewModel.CurrentValue = 1;
+            if (viewModel.CurrentValue < 0) viewModel.CurrentValue = 0;
         }
 
         private void Discharge_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (viewModel.CurrentValue >= _clickIncrement)
-            {
-                viewModel.CurrentValue = viewModel.CurrentValue - .025;
-            }
-            else
-            {
-                viewModel.CurrentValue = 0;
-            }
-
             //TODO: Send the event to GridBankApi
+            var apiAdapter = new GridBankApiAdapter();
+            viewModel.CurrentValue = apiAdapter.Drain(_siteId, (decimal)_clickIncrement);
+
+            if (viewModel.CurrentValue > 1) viewModel.CurrentValue = 1;
+            if (viewModel.CurrentValue < 0) viewModel.CurrentValue = 0;
         }
     }
 
-    public class MainWindowViewModel : INotifyPropertyChanged
-    {
-        private double _currentValue;
-
-        public MainWindowViewModel()
-        {
-            CurrentValue = .65;
-        }
-
-        public double CurrentValue
-        {
-
-            get { return _currentValue; }
-            set
-            {
-                if (value == _currentValue)
-                    return;
-
-                _currentValue = value;
-                OnPropertyChanged("CurrentValue");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
 }

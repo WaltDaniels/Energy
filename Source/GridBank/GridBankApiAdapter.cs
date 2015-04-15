@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace GridBank
@@ -15,9 +16,9 @@ namespace GridBank
             GridBankApiUrl = ConfigurationManager.AppSettings["GridBankApiUrl"];
         }
 
-        public decimal GetCurrentPower(int siteId)
+        public double GetCurrentPower(int siteId)
         {
-            decimal retPower = 0;
+            double retPower = 0;
 
             var uri = string.Format(
                     "{0}/api/usage/getcurrentpower?siteid={1}",
@@ -25,39 +26,39 @@ namespace GridBank
                     siteId);
 
             string retString = GetRequest(uri).Result;
-            decimal.TryParse(retString, out retPower);
+            double.TryParse(retString, out retPower);
 
             return retPower;
         }
 
-        public decimal Drain(int siteId)
+        public double Drain(int siteId, decimal amount)
         {
-            decimal retPower = 0;
+            double retPower = 0;
 
             var uri = string.Format(
                 "{0}/api/usage/drain",
                 GridBankApiUrl);
 
-            var content = new StringContent("siteid=" + siteId);
+            var content = new StringContent(string.Format("siteid={0}&amount={1}", siteId, amount));
 
             string retString = PostRequest(uri, content).Result;
-            decimal.TryParse(retString, out retPower);
+            double.TryParse(retString, out retPower);
 
             return retPower;
         }
 
-        public decimal Charge(int siteId)
+        public double Charge(int siteId, decimal amount)
         {
-            decimal retPower = 0;
+            double retPower = 0;
 
             var uri = string.Format(
                 "{0}/api/usage/charge",
                 GridBankApiUrl);
 
-            var content = new StringContent("siteid=" + siteId);
+            var content = new StringContent(string.Format("siteid={0}&amount={1}", siteId, amount));
 
             string retString = PostRequest(uri, content).Result;
-            decimal.TryParse(retString, out retPower);
+            double.TryParse(retString, out retPower);
 
             return retPower;
         }
@@ -66,9 +67,12 @@ namespace GridBank
         {
             string retString = null;
 
+            //Set the media type
+            content.Headers.ContentType.MediaType = "application/x-www-form-urlencoded";
+
             //Make the WebAPI call to collect data
             var httpClient = new HttpClient();
-            HttpResponseMessage response = await httpClient.PostAsync(url, content);
+            HttpResponseMessage response = await httpClient.PostAsync(url, content).ConfigureAwait(false);
             if (response != null && response.StatusCode == HttpStatusCode.OK)
             {
                 retString = await response.Content.ReadAsStringAsync();
@@ -87,7 +91,8 @@ namespace GridBank
 
             //Make the WebAPI call to collect data
             var httpClient = new HttpClient();
-            HttpResponseMessage response = await httpClient.GetAsync(url);
+            httpClient.Timeout = new TimeSpan(0, 0, 30);
+            HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
             if (response != null && response.StatusCode == HttpStatusCode.OK)
             {
                 retString = await response.Content.ReadAsStringAsync();
