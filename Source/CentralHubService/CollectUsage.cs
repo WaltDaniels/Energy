@@ -29,7 +29,7 @@ namespace CentralHubService
                     "{0}/api/usage/getupates?siteid={1}&detailsStartingDateTime={2}", 
                     site.ApiUrl, 
                     site.Id,
-                    WebUtility.UrlEncode(lastUpdate.ToString()));
+                    WebUtility.UrlEncode(lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff")));
 
                 //Make the WebAPI call to collect data
                 var httpClient = new HttpClient();
