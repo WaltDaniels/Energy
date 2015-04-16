@@ -17,12 +17,12 @@
                 <td>Entry Date / Time</td>
                 <td>Current Power Level</td>
             </tr>
-            @foreach (var item in Model.UsageEntries)
+            @for (int i = Model.UsageEntries.Count - 1; i >= 0; i--)
             {
                 <tr>
-                    <td>@item.IdGuid</td>
-                    <td>@item.TimeStamp</td>
-                    <td>@item.CurrentPower</td>
+                    <td>@Model.UsageEntries[i].IdGuid</td>
+                    <td>@Model.UsageEntries[i].TimeStamp</td>
+                    <td>@Model.UsageEntries[i].CurrentPower</td>
                 </tr>
             }
         </table>
