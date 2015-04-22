@@ -6,7 +6,7 @@ namespace CentralHub.Controllers
 {
     public class GridBankController : Controller
     {
-        private int _siteId = 1;
+        private readonly int _siteId = 1;
 
         public async Task<ActionResult> Collect()
         {

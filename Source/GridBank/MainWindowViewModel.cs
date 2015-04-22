@@ -4,12 +4,11 @@ namespace GridBank
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private double _currentValue;
         private double _currentPercent;
+        private double _currentValue;
 
         public double CurrentValue
         {
-
             get { return _currentValue; }
             set
             {

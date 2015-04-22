@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
     <h1>GridBankApi</h1>
-    <p class="lead">GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank.  It is also used by GridBank to store all usage information in a SQL Server database.</p>
+    <p class="lead">GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank. It is also used by GridBank to store all usage information in a SQL Server database.</p>
     <button type="button" class="btn btn-primary btn-lg">Power level: <span id="currentPower"></span></button> <em>Updated via SignalR</em>
 
 </div>
@@ -13,16 +13,16 @@
     <div class="col-md-4">
         <h2>CentralHub</h2>
         <p>
-            CentralHub is the collection engine and data aggregator for all remote GridBank units.  Data from the GridBank units can be collected and stored in a SQL Server database.  Historical readings can also be displlayed.
+            CentralHub is the collection engine and data aggregator for all remote GridBank units. Data from the GridBank units can be collected and stored in a SQL Server database. Historical readings can also be displlayed.
         </p>
     </div>
     <div class="col-md-4">
         <h2>GridBankApi</h2>
-        <p>GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank.  It is also used by GridBank to store all usage information in a SQL Server database.</p>
+        <p>GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank. It is also used by GridBank to store all usage information in a SQL Server database.</p>
     </div>
     <div class="col-md-4">
         <h2>GridBank</h2>
-        <p>GridBank is the battery simulator.  It registers Charge and Discharge events with the GridBankApi for future collection by the CentralHub.</p>
+        <p>GridBank is the battery simulator. It registers Charge and Discharge events with the GridBankApi for future collection by the CentralHub.</p>
     </div>
 </div>
 
@@ -35,19 +35,19 @@
 
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             // Declare a proxy to reference the hub.
             var gridHub = $.connection.gridHub;
 
             // Create a function that the hub can call to broadcast messages.
-            gridHub.client.broadcastMessage = function (currentPower) {
+            gridHub.client.broadcastMessage = function(currentPower) {
                 // Html encode display current power.
                 $("#currentPower").text(currentPower);
 
             };
 
             // Start the connection.
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start().done(function() {
                 // Perform any initialization here
             });
         });

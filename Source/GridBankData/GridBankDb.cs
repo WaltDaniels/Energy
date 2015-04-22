@@ -2,7 +2,7 @@ using System.Data.Entity;
 
 namespace GridBankData
 {
-    public partial class GridBankDb : DbContext
+    public class GridBankDb : DbContext
     {
         public GridBankDb()
             : base("name=GridBankDb")

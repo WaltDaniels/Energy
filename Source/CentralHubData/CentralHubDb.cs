@@ -2,7 +2,7 @@ using System.Data.Entity;
 
 namespace CentralHubData
 {
-    public partial class CentralHubDb : DbContext
+    public class CentralHubDb : DbContext
     {
         public CentralHubDb()
             : base("name=CentralHubDb")

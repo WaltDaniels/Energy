@@ -20,11 +20,11 @@ namespace GridBankService
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
-                decimal updatedPower = (lastReading != null && lastReading.CurrentPower > Amount 
-                    ? lastReading.CurrentPower - Amount 
+                var updatedPower = (lastReading != null && lastReading.CurrentPower > Amount
+                    ? lastReading.CurrentPower - Amount
                     : 0);
 
-                var usage = new Usage()
+                var usage = new Usage
                 {
                     IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
@@ -52,11 +52,11 @@ namespace GridBankService
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
-                decimal updatedPower = (lastReading != null && lastReading.CurrentPower < (1-Amount) 
-                    ? lastReading.CurrentPower + Amount 
+                var updatedPower = (lastReading != null && lastReading.CurrentPower < (1 - Amount)
+                    ? lastReading.CurrentPower + Amount
                     : 1);
-                
-                var usage = new Usage()
+
+                var usage = new Usage
                 {
                     IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
@@ -78,15 +78,15 @@ namespace GridBankService
             {
                 var usageEntries =
                     context.Usages
-                           .Where(x => x.GridBankSiteId == SiteId && x.TimeStamp > detailsStartingDateTime)
-                           .OrderBy(x => x.TimeStamp)
-                           .Select(x => new UsageEntry
-                           {
-                               IdGuid = x.IdGuid,
-                               TimeStamp = x.TimeStamp,
-                               CurrentPower = x.CurrentPower
-                           })
-                           .ToList();
+                        .Where(x => x.GridBankSiteId == SiteId && x.TimeStamp > detailsStartingDateTime)
+                        .OrderBy(x => x.TimeStamp)
+                        .Select(x => new UsageEntry
+                        {
+                            IdGuid = x.IdGuid,
+                            TimeStamp = x.TimeStamp,
+                            CurrentPower = x.CurrentPower
+                        })
+                        .ToList();
 
                 return usageEntries;
             }
@@ -100,7 +100,7 @@ namespace GridBankService
                 if (site == null) throw new Exception("Site not found!");
 
                 var lastUsage = site.Usages.OrderByDescending(x => x.TimeStamp).FirstOrDefault();
-                decimal lastPower = lastUsage != null ? lastUsage.CurrentPower : 0;
+                var lastPower = lastUsage != null ? lastUsage.CurrentPower : 0;
 
                 return lastPower;
             }

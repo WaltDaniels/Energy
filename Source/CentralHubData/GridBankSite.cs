@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CentralHubData
 {
     [Table("GridBankSite")]
-    public partial class GridBankSite
+    public class GridBankSite
     {
         public GridBankSite()
         {

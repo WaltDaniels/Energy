@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using CentralHub;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CentralHub.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace CentralHub
 {
     public partial class Startup

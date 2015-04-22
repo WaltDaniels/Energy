@@ -23,20 +23,20 @@ namespace CentralHubService
                 if (site == null) throw new Exception("Site not found!");
 
                 var lastUsage = site.Usages.OrderByDescending(x => x.TimeStamp).FirstOrDefault();
-                DateTime lastUpdate = lastUsage != null ? lastUsage.TimeStamp : new DateTime();
+                var lastUpdate = lastUsage != null ? lastUsage.TimeStamp : new DateTime();
 
                 var uri = string.Format(
-                    "{0}/api/usage/getupates?siteid={1}&detailsStartingDateTime={2}", 
-                    site.ApiUrl, 
+                    "{0}/api/usage/getupates?siteid={1}&detailsStartingDateTime={2}",
+                    site.ApiUrl,
                     site.Id,
                     WebUtility.UrlEncode(lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff")));
 
                 //Make the WebAPI call to collect data
                 var httpClient = new HttpClient();
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                var response = await httpClient.GetAsync(uri);
                 if (response != null && response.StatusCode == HttpStatusCode.OK)
                 {
-                    string jsonSting = await response.Content.ReadAsStringAsync();
+                    var jsonSting = await response.Content.ReadAsStringAsync();
                     retDetails = JsonConvert.DeserializeObject<Details>(jsonSting);
                 }
                 else
@@ -59,7 +59,8 @@ namespace CentralHubService
                 foreach (var entry in details.UsageEntries)
                 {
                     //See if this Guid already exists
-                    var currentRecord = site.Usages.FirstOrDefault(x => x.IdGuid == entry.IdGuid && x.GridBankSiteId == details.SiteId);
+                    var currentRecord =
+                        site.Usages.FirstOrDefault(x => x.IdGuid == entry.IdGuid && x.GridBankSiteId == details.SiteId);
                     if (currentRecord != null)
                     {
                         //Yes, it exists ... update it
@@ -70,7 +71,7 @@ namespace CentralHubService
                     else
                     {
                         //No, this is a new entry ... add it
-                        site.Usages.Add(new Usage()
+                        site.Usages.Add(new Usage
                         {
                             IdGuid = entry.IdGuid,
                             GridBankSiteId = details.SiteId,

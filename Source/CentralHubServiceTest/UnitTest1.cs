@@ -1,5 +1,4 @@
-﻿using System;
-using CentralHubService;
+﻿using CentralHubService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CentralHubServiceTest

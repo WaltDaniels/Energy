@@ -17,7 +17,7 @@
                 <td>Entry Date / Time</td>
                 <td>Current Power Level</td>
             </tr>
-            @for (int i = Model.UsageEntries.Count - 1; i >= 0; i--)
+            @for (var i = Model.UsageEntries.Count - 1; i >= 0; i--)
             {
                 <tr>
                     <td>@Model.UsageEntries[i].IdGuid</td>
@@ -36,4 +36,3 @@ else
 {
     <h3>No response from remote service.</h3>
 }
-

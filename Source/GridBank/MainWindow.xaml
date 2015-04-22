@@ -11,7 +11,7 @@
                       GlowBrush="Black">
     <Controls:MetroWindow.Background>
         <ImageBrush ImageSource="Assets/alevo.jpg"
-                    Stretch="UniformToFill"/>
+                    Stretch="UniformToFill" />
     </Controls:MetroWindow.Background>
     <Grid>
         <StackPanel Orientation="Vertical"
@@ -21,12 +21,12 @@
             <Button Content="Discharge"
                     Background="Red"
                     Margin="0,0,0,10"
-                    Click="Discharge_Click"></Button>
+                    Click="Discharge_Click" />
             <Button Content="Charge"
                     Background="Lime"
-                    Click="Charge_Click"></Button>
+                    Click="Charge_Click" />
         </StackPanel>
-        
+
         <!--Blue Gauge -->
         <gauge:CircularGaugeControl x:Name="myGauge2"
                                     Grid.Column="1"

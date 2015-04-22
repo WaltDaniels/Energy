@@ -54,7 +54,7 @@ namespace GridBankApi.Controllers
         public Details GetUpdates(int siteId, DateTime detailsStartingDateTime)
         {
             var service = new PowerUsage();
-            var details = new Details()
+            var details = new Details
             {
                 SiteId = siteId,
                 UsageEntries = service.GetEntries(siteId, detailsStartingDateTime)

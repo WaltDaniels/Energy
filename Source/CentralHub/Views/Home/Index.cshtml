@@ -4,10 +4,10 @@
 
 <div class="jumbotron">
     <h1>CentralHub</h1>
-    <p class="lead">CentralHub is the collection engine and data aggregator for all remote GridBank units.  Data can be collected and historical readings displayed.</p>
+    <p class="lead">CentralHub is the collection engine and data aggregator for all remote GridBank units. Data can be collected and historical readings displayed.</p>
     <p>
-        @Html.ActionLink("Collect Data", "Collect", "GridBank", null, new { @class = "btn btn-primary btn-lg" }) &nbsp;
-        @Html.ActionLink("Display Data", "Display", "GridBank", null, new { @class = "btn btn-primary btn-lg" })
+        @Html.ActionLink("Collect Data", "Collect", "GridBank", null, new {@class = "btn btn-primary btn-lg"}) &nbsp;
+        @Html.ActionLink("Display Data", "Display", "GridBank", null, new {@class = "btn btn-primary btn-lg"})
     </p>
 </div>
 
@@ -15,15 +15,15 @@
     <div class="col-md-4">
         <h2>CentralHub</h2>
         <p>
-            CentralHub is the collection engine and data aggregator for all remote GridBank units.  Data from the GridBank units can be collected and stored in a SQL Server database.  Historical readings can also be displlayed.
+            CentralHub is the collection engine and data aggregator for all remote GridBank units. Data from the GridBank units can be collected and stored in a SQL Server database. Historical readings can also be displlayed.
         </p>
     </div>
     <div class="col-md-4">
         <h2>GridBankApi</h2>
-        <p>GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank.  It is also used by GridBank to store all usage information in a SQL Server database.</p>
+        <p>GridBankApi is a WebApi RESTful service used by CentralHub to collect usage data from the remote GridBank. It is also used by GridBank to store all usage information in a SQL Server database.</p>
     </div>
     <div class="col-md-4">
         <h2>GridBank</h2>
-        <p>GridBank is the battery simulator.  It registers Charge and Discharge events with the GridBankApi for future collection by the CentralHub.</p>
+        <p>GridBank is the battery simulator. It registers Charge and Discharge events with the GridBankApi for future collection by the CentralHub.</p>
     </div>
 </div>
