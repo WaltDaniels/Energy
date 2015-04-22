@@ -20,6 +20,7 @@ namespace GridBankApi.Controllers
             var service = new PowerUsage();
             var currentPower = service.Drain(body.SiteId, body.Amount);
 
+            PushUpdate.BroadcastPowerLevel(currentPower);
             return currentPower;
         }
 
@@ -31,6 +32,7 @@ namespace GridBankApi.Controllers
             var service = new PowerUsage();
             var currentPower = service.Charge(body.SiteId, body.Amount);
 
+            PushUpdate.BroadcastPowerLevel(currentPower);
             return currentPower;
         }
 
@@ -42,6 +44,7 @@ namespace GridBankApi.Controllers
             var service = new PowerUsage();
             var currentPower = service.GetCurrentPower(siteId);
 
+            PushUpdate.BroadcastPowerLevel(currentPower);
             return currentPower;
         }
 

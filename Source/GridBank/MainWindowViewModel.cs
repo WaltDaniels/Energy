@@ -5,6 +5,7 @@ namespace GridBank
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private double _currentValue;
+        private double _currentPercent;
 
         public double CurrentValue
         {
@@ -16,7 +17,21 @@ namespace GridBank
                     return;
 
                 _currentValue = value;
+                CurrentPercent = value*100;
                 OnPropertyChanged("CurrentValue");
+            }
+        }
+
+        public double CurrentPercent
+        {
+            get { return _currentPercent; }
+            set
+            {
+                if (value == _currentPercent)
+                    return;
+
+                _currentPercent = value;
+                OnPropertyChanged("CurrentPercent");
             }
         }
 

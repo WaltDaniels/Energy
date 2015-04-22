@@ -22,7 +22,7 @@
                 <tr>
                     <td>@Model.UsageEntries[i].IdGuid</td>
                     <td>@Model.UsageEntries[i].TimeStamp</td>
-                    <td>@Model.UsageEntries[i].CurrentPower</td>
+                    <td>@string.Format("{0:P1}", Model.UsageEntries[i].CurrentPower)</td>
                 </tr>
             }
         </table>

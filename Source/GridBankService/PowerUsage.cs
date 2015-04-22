@@ -20,15 +20,16 @@ namespace GridBankService
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
-                decimal lastPower = (lastReading != null ? lastReading.CurrentPower : 0);
-
+                decimal updatedPower = (lastReading != null && lastReading.CurrentPower > Amount 
+                    ? lastReading.CurrentPower - Amount 
+                    : 0);
 
                 var usage = new Usage()
                 {
                     IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
                     TimeStamp = DateTime.Now,
-                    CurrentPower = lastPower - Amount,
+                    CurrentPower = updatedPower,
                     IsNew = true
                 };
 
@@ -51,15 +52,16 @@ namespace GridBankService
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
-                decimal lastPower = (lastReading != null ? lastReading.CurrentPower : 0);
-
-
+                decimal updatedPower = (lastReading != null && lastReading.CurrentPower < (1-Amount) 
+                    ? lastReading.CurrentPower + Amount 
+                    : 1);
+                
                 var usage = new Usage()
                 {
                     IdGuid = Guid.NewGuid(),
                     GridBankSiteId = SiteId,
                     TimeStamp = DateTime.Now,
-                    CurrentPower = lastPower + Amount,
+                    CurrentPower = updatedPower,
                     IsNew = true
                 };
 
