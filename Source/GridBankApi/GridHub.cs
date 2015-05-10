@@ -17,6 +17,10 @@ namespace GridBankApi
             _pushUpdate = pushUpdate;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentPower"></param>
         public void UsageUpdate(decimal currentPower)
         {
             Clients.All.broadCastMessage(currentPower.ToString());
