@@ -52,9 +52,11 @@ namespace GridBankService
                         .OrderByDescending(x => x.TimeStamp)
                         .FirstOrDefault();
 
-                var updatedPower = (lastReading != null && lastReading.CurrentPower < (1 - Amount)
-                    ? lastReading.CurrentPower + Amount
-                    : 1);
+                var updatedPower = (lastReading != null
+                    ? (lastReading.CurrentPower < (1 - Amount)
+                        ? lastReading.CurrentPower + Amount
+                        : 1)
+                    : Amount);
 
                 var usage = new Usage
                 {
